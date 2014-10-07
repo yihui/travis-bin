@@ -11,14 +11,15 @@ install:
 
 script:
   - cabal install --flags="embed_data_files" pandoc pandoc-citeproc
+  - cp ~/.cabal/bin/pandoc* ./
 
 deploy:
   provider: releases
   api-key:
     secure: "Lf3cMSpdhZ/2Xd4U1ty+uycfhuYaBylOJMBmSkiIkUoVVsIA51wGCfCwDV4+5vaCnWISmHGBcdzi5uLsRdN/0FyVjP9py5edrJdgX4OQJTozfalB+fz4P4zdaMDdnvQgEsSDez4O8sHoHAhkz0K9I+zVswGlpD/+3udqIohdxTo="
   file:
-    - ~/.cabal/bin/pandoc
-    - ~/.cabal/bin/pandoc-citeproc
+    - pandoc
+    - pandoc-citeproc
   skip_cleanup: true
   on:
     tags: true
