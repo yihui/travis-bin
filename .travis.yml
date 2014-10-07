@@ -1,0 +1,24 @@
+language: c
+
+env:
+  - PATH=$PATH:$HOME/.cabal/bin
+
+install:
+  - sudo apt-get update
+  - sudo apt-get install -qq haskell-platform > /dev/null
+  - cabal update
+  - cabal install hsb2hs
+
+script:
+  - cabal install --flags="embed_data_files" pandoc pandoc-citeproc
+
+deploy:
+  provider: releases
+  api-key:
+    secure: "Lf3cMSpdhZ/2Xd4U1ty+uycfhuYaBylOJMBmSkiIkUoVVsIA51wGCfCwDV4+5vaCnWISmHGBcdzi5uLsRdN/0FyVjP9py5edrJdgX4OQJTozfalB+fz4P4zdaMDdnvQgEsSDez4O8sHoHAhkz0K9I+zVswGlpD/+3udqIohdxTo="
+  file:
+    - ~/.cabal/bin/pandoc
+    - ~/.cabal/bin/pandoc-citeproc
+  skip_cleanup: true
+  on:
+    tags: true
