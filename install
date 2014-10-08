@@ -1,0 +1,18 @@
+#!/bin/sh
+
+case $TARGET in
+  pandoc)
+    sudo apt-get install -qq haskell-platform
+    cabal update
+    cabal install hsb2hs
+    ;;
+  texlive)
+    sudo apt-get -qq install equivs
+    sed -i 's@\$HOME@'"$HOME"'@' texlive.profile
+    wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+    wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
+    ;;
+  *)
+    echo "nothing to build"
+    ;;
+esac

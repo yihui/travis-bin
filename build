@@ -1,0 +1,20 @@
+#!/bin/sh
+
+case $TARGET in
+  pandoc)
+    cabal install --flags="embed_data_files" pandoc pandoc-citeproc
+    cp ~/.cabal/bin/pandoc* ./
+    ;;
+  texlive)
+    tar zxf install-tl*
+    ./install-tl*/install-tl -profile TexLive.profile
+    equivs-build debian-*
+    mv texlive-local*.deb texlive-local.deb
+    cd ~
+    tar zcf texlive.tar.gz texlive
+    cp texlive.tar.gz $TRAVIS_BUILD_DIR
+    ;;
+  *)
+    echo "nothing to build"
+    ;;
+esac

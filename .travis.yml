@@ -3,24 +3,26 @@ language: c
 env:
   - PATH=$PATH:$HOME/.cabal/bin
 
+before_install:
+  - export TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
+
 install:
   - sudo apt-get update
-  - sudo apt-get install -qq haskell-platform > /dev/null
-  - cabal update
-  - cabal install hsb2hs
+  - "[ -z $TRAVIS_TAG ] || ./install"
 
 script:
-  - cabal install --flags="embed_data_files" pandoc pandoc-citeproc
-  - cp ~/.cabal/bin/pandoc* ./
+  - "[ -z $TRAVIS_TAG ] || ./build"
 
 deploy:
   provider: releases
   api-key:
     secure: "Lf3cMSpdhZ/2Xd4U1ty+uycfhuYaBylOJMBmSkiIkUoVVsIA51wGCfCwDV4+5vaCnWISmHGBcdzi5uLsRdN/0FyVjP9py5edrJdgX4OQJTozfalB+fz4P4zdaMDdnvQgEsSDez4O8sHoHAhkz0K9I+zVswGlpD/+3udqIohdxTo="
   file:
-    - pandoc
-    - pandoc-citeproc
+    - pandoc*
+    - texlive*
+  file_glob: true
   skip_cleanup: true
   on:
     tags: true
     all_branches: true
+    condition: $TRAVIS_TAG = latest
