@@ -8,7 +8,7 @@ before_install:
   - "if [ ! -z $TRAVIS_TAG ]; then if [ -z $TARGET ]; then export TARGET='pandoc texlive'; fi; fi"
 
 install:
-  - "[ -z $TRAVIS_TAG ] && exit 0"
+  - "[ -z $TRAVIS_TAG ] && exit 0 || true"
   - sudo apt-get update
   - ./install"
 
