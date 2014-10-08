@@ -5,6 +5,7 @@ env:
 
 before_install:
   - export TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
+  - "[ ! -z $TRAVIS_TAG ] && [ -z $TARGET ] && export TARGET='pandoc texlive'"
 
 install:
   - "[ -z $TRAVIS_TAG ] || exit 0"

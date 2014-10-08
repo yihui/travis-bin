@@ -1,6 +1,8 @@
 #!/bin/sh
 
-case $TARGET in
+for i in $TARGET;
+do
+case $i in
   pandoc)
     cabal install --flags="embed_data_files" pandoc pandoc-citeproc
     cp ~/.cabal/bin/pandoc* ./
@@ -18,3 +20,4 @@ case $TARGET in
     echo "nothing to build"
     ;;
 esac
+done
