@@ -7,8 +7,9 @@ before_install:
   - export TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
 
 install:
+  - "[ -z $TRAVIS_TAG ] || exit 0"
   - sudo apt-get update
-  - "[ -z $TRAVIS_TAG ] || ./install"
+  - ./install"
 
 script:
   - "[ -z $TRAVIS_TAG ] || ./build"
