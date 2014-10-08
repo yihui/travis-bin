@@ -10,7 +10,7 @@ before_install:
 install:
   - "[ -z $TRAVIS_TAG ] && exit 0 || true"
   - sudo apt-get update
-  - ./install"
+  - ./install
 
 script:
   - "[ -z $TRAVIS_TAG ] || ./build"
