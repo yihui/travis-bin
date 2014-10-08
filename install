@@ -8,7 +8,7 @@ case $TARGET in
     ;;
   texlive)
     sudo apt-get -qq install equivs
-    sed -i 's@\$HOME@'"$HOME"'@' texlive.profile
+    sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
     wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
     wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
     ;;
