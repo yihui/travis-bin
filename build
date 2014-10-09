@@ -11,7 +11,7 @@ case $i in
     tar zxf install-tl*
     ./install-tl*/install-tl -profile TexLive.profile
     sudo ~/texlive/bin/x86_64-linux/tlmgr path add
-    tlmgr install ec framed upquote xetex
+    tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
     equivs-build debian-*
     mv texlive-local*.deb texlive-local.deb
     cd ~
