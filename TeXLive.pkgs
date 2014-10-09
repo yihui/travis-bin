@@ -46,6 +46,7 @@ ms
 multirow
 nextpage
 ntgclass
+palatino
 paralist
 parskip
 pdfpages
@@ -59,6 +60,7 @@ setspace
 soul
 subfig
 subfigure
+tex4ht
 textcase
 thumbpdf
 titlesec
