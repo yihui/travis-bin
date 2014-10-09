@@ -6,9 +6,11 @@ appendix
 beamer
 biblatex
 bibtex
+blkarray
 booktabs
 breakurl
 caption
+ccaption
 cite
 csquotes
 diagbox
@@ -22,6 +24,7 @@ fancybox
 fancyvrb
 float
 floatrow
+fp
 framed
 inconsolata
 kerkis
@@ -29,8 +32,10 @@ koma-script
 l3kernel
 l3packages
 lastpage
+lipsum
 listings
 lm
+logreq
 marvosym
 mathtools
 mdwtools
@@ -39,6 +44,7 @@ mhchem
 microtype
 ms
 multirow
+nextpage
 ntgclass
 paralist
 parskip
@@ -52,6 +58,7 @@ sectsty
 setspace
 soul
 subfig
+subfigure
 textcase
 thumbpdf
 titlesec
@@ -59,6 +66,7 @@ titling
 tocbibind
 tocloft
 todonotes
+trimspaces
 tufte-latex
 txfonts
 ucs
@@ -69,3 +77,4 @@ xcomment
 xetex
 xetex-def
 xstring
+zapfding
