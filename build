@@ -12,6 +12,10 @@ case $i in
     ./install-tl*/install-tl -profile TexLive.profile
     sudo ~/texlive/bin/x86_64-linux/tlmgr path add
     tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
+    # `tlmgr install bibtex` does not install apalike.sty, hence the hack
+    wget http://www.tex.ac.uk/ctan/biblio/bibtex/base/apalike.sty
+    mv apalike.sty ~/texlive/texmf-dist/tex/latex/
+    mktexlsr
     equivs-build debian-*
     mv texlive-local*.deb texlive-local.deb
     cd ~
