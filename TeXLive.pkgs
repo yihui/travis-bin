@@ -28,6 +28,7 @@ float
 floatrow
 fp
 framed
+helvetic
 inconsolata
 kerkis
 koma-script
@@ -69,6 +70,7 @@ subfigure
 tex4ht
 textcase
 thumbpdf
+times
 titlesec
 titling
 tocbibind
