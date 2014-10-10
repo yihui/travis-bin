@@ -6,6 +6,8 @@ case $i in
   pandoc)
     cabal install --flags="embed_data_files" pandoc pandoc-citeproc
     cp ~/.cabal/bin/pandoc* ./
+    tar zcf pandoc.tar.gz pandoc pandoc-citeproc
+    rm pandoc pandoc-citeproc
     ;;
   texlive)
     tar zxf install-tl*
