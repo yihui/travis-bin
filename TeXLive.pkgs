@@ -12,6 +12,7 @@ breakurl
 caption
 ccaption
 cite
+cleveref
 csquotes
 diagbox
 doi
@@ -32,11 +33,14 @@ koma-script
 l3kernel
 l3packages
 lastpage
+lineno
 lipsum
 listings
 lm
 logreq
 marvosym
+mathabx
+mathpazo
 mathtools
 mdwtools
 memoir
@@ -74,6 +78,7 @@ txfonts
 ucs
 upquote
 vmargin
+wrapfig
 xcolor
 xcomment
 xetex
