@@ -10,6 +10,7 @@ case $i in
     ;;
   r-devel)
     wget http://cran.rstudio.com/src/base-prerelease/R-latest.tar.gz
+    sudo apt-get -qq build-dep r-base
     ;;
   texlive)
     sudo apt-get -qq install equivs
