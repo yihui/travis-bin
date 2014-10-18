@@ -11,7 +11,7 @@ case $i in
     ;;
   r-devel)
     tar zxf R-latest.tar.gz
-    cd R-*
+    cd R-patched
     ./tools/rsync-recommended
     ./configure --prefix=$HOME/R-latest
     make -j2 && make install
