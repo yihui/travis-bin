@@ -5,7 +5,7 @@ env:
 
 before_install:
   - export TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
-  - "if [ ! -z $TRAVIS_TAG ]; then if [ -z $TARGET ]; then export TARGET='pandoc texlive'; fi; fi"
+  - "if [ ! -z $TRAVIS_TAG ]; then if [ -z $TARGET ]; then export TARGET='pandoc r-devel texlive'; fi; fi"
 
 install:
   - "[ -z $TRAVIS_TAG ] && exit 0 || true"
@@ -22,6 +22,7 @@ deploy:
   file:
     - pandoc*
     - texlive*
+    - R-*
   file_glob: true
   skip_cleanup: true
   on:

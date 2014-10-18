@@ -8,6 +8,9 @@ case $i in
     cabal update
     cabal install hsb2hs
     ;;
+  r-devel)
+    wget http://cran.rstudio.com/src/base-prerelease/R-latest.tar.gz
+    ;;
   texlive)
     sudo apt-get -qq install equivs
     sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile

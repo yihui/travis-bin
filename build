@@ -9,6 +9,16 @@ case $i in
     tar zcf pandoc.tar.gz pandoc pandoc-citeproc
     rm pandoc pandoc-citeproc
     ;;
+  r-devel)
+    tar zxf R-latest.tar.gz
+    cd R-*
+    ./tools/rsync-recommended
+    ./configure --prefix=$HOME/R-latest
+    make -j2 && make install
+    cd ..
+    rm -r R-*
+    tar zcf R-latest.tar.gz -C ~ R-latest
+    ;;
   texlive)
     tar zxf install-tl*
     ./install-tl*/install-tl -profile TexLive.profile
