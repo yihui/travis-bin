@@ -20,9 +20,7 @@ case $i in
     mktexlsr
     equivs-build debian-*
     mv texlive-local*.deb texlive-local.deb
-    cd ~
-    tar zcf texlive.tar.gz texlive
-    cp texlive.tar.gz $TRAVIS_BUILD_DIR
+    tar zcf texlive.tar.gz -C ~ texlive
     ;;
   *)
     echo "nothing to build"
