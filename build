@@ -11,11 +11,11 @@ case $TARGET in
     tar zxf R-latest.tar.gz
     cd R-patched
     ./tools/rsync-recommended
-    ./configure --prefix=$HOME/R-latest
+    ./configure --prefix=$HOME/R-devel
     make -j2 && make install
     cd ..
     rm -r R-*
-    tar zcf R-latest.tar.gz -C ~ R-latest
+    tar zcf R-devel.tar.gz -C ~ R-devel
     ;;
   texlive)
     tar zxf install-tl*
