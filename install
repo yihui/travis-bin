@@ -1,8 +1,6 @@
 #!/bin/sh
 
-for i in $TARGET;
-do
-case $i in
+case $TARGET in
   pandoc)
     sudo apt-get install -qq haskell-platform
     cabal update
@@ -22,4 +20,3 @@ case $i in
     echo "nothing to build"
     ;;
 esac
-done
