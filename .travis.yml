@@ -1,11 +1,16 @@
 language: c
 
 env:
-  - PATH=$PATH:$HOME/.cabal/bin
+  global:
+    - PATH=$PATH:$HOME/.cabal/bin
+  matrix:
+    - TARGET=pandoc
+    - TARGET=r-devel
+    - TARGET=texlive
 
 before_install:
-  - export TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
-  - "if [ ! -z $TRAVIS_TAG ]; then if [ -z $TARGET ]; then export TARGET='pandoc r-devel texlive'; fi; fi"
+  - export COMMIT_TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
+  - "if [ ! -z $COMMIT_TARGET ]; then if [ $COMMIT_TARGET != $TARGET ]; then export TARGET=''; fi; fi"
 
 install:
   - "[ -z $TRAVIS_TAG ] && exit 0 || true"
@@ -28,3 +33,4 @@ deploy:
   on:
     tags: true
     all_branches: true
+    condition: $TARGET != ""
