@@ -25,6 +25,7 @@ enumitem
 environ
 etoolbox
 eurosym
+everypage
 fancybox
 fancyvrb
 float
@@ -55,6 +56,7 @@ ms
 multirow
 nextpage
 ntgclass
+ntheorem
 palatino
 paralist
 parskip
