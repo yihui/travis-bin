@@ -3,6 +3,7 @@ algorithms
 animate
 apacite
 appendix
+bbm-macros
 beamer
 biblatex
 bibtex
@@ -13,10 +14,12 @@ caption
 ccaption
 cite
 cleveref
+comment
 courier
 csquotes
 diagbox
 doi
+draftwatermark
 ec
 enumitem
 environ
@@ -60,6 +63,7 @@ pgf
 picinpar
 pict2e
 preprint
+preview
 relsize
 rotating
 sectsty
@@ -69,6 +73,7 @@ subfig
 subfigure
 tex4ht
 textcase
+threeparttable
 thumbpdf
 times
 titlesec
@@ -88,4 +93,5 @@ xcomment
 xetex
 xetex-def
 xstring
+xtab
 zapfding
