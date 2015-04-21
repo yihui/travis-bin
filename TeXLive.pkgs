@@ -1,4 +1,5 @@
 a4wide
+adjustbox
 algorithms
 animate
 apacite
@@ -74,6 +75,7 @@ shadethm
 soul
 subfig
 subfigure
+tabu
 tex4ht
 textcase
 threeparttable
