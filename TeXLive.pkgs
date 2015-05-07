@@ -1,5 +1,6 @@
 a4wide
 adjustbox
+algorithm2e
 algorithms
 animate
 apacite
@@ -15,11 +16,13 @@ caption
 ccaption
 cite
 cleveref
+collectbox
 comment
 courier
 csquotes
 diagbox
 doi
+doublestroke
 draftwatermark
 ec
 enumitem
@@ -75,7 +78,9 @@ shadethm
 soul
 subfig
 subfigure
+symbol
 tabu
+tabulary
 tex4ht
 textcase
 threeparttable
@@ -91,7 +96,9 @@ tufte-latex
 txfonts
 ucs
 ulem
+underscore
 upquote
+varwidth
 vmargin
 wrapfig
 xcolor
@@ -100,4 +107,5 @@ xetex
 xetex-def
 xstring
 xtab
+zapfchan
 zapfding
