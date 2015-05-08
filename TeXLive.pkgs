@@ -35,9 +35,12 @@ fancyvrb
 float
 floatrow
 fp
+fpl
 framed
+harvard
 helvetic
 inconsolata
+jknapltx
 kerkis
 koma-script
 l3kernel
@@ -48,6 +51,7 @@ lipsum
 listings
 lm
 logreq
+manfnt
 marvosym
 mathabx
 mathpazo
@@ -64,6 +68,7 @@ ntheorem
 palatino
 paralist
 parskip
+pbox
 pdfpages
 pgf
 picinpar
