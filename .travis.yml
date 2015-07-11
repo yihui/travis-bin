@@ -1,5 +1,13 @@
 language: c
 
+sudo: false
+
+addons:
+  apt:
+    packages:
+    - haskell-platform
+    - equivs
+
 env:
   global:
     - PATH=$PATH:$HOME/.cabal/bin
@@ -14,7 +22,6 @@ before_install:
 
 install:
   - "[ -z $TRAVIS_TAG ] && exit 0 || true"
-  - sudo apt-get update
   - ./install
 
 script:

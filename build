@@ -20,7 +20,7 @@ case $TARGET in
   texlive)
     tar zxf install-tl*
     ./install-tl*/install-tl -profile TexLive.profile
-    sudo ~/texlive/bin/x86_64-linux/tlmgr path add
+    export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
     tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
     # `tlmgr install bibtex` does not install apalike.sty, hence the hack
     wget http://www.tex.ac.uk/ctan/biblio/bibtex/base/apalike.sty

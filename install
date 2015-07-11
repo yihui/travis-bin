@@ -2,7 +2,6 @@
 
 case $TARGET in
   pandoc)
-    sudo apt-get install -qq haskell-platform
     cabal update
     cabal install hsb2hs
     ;;
@@ -11,7 +10,6 @@ case $TARGET in
     sudo apt-get -qq build-dep r-base
     ;;
   texlive)
-    sudo apt-get -qq install equivs
     sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
     wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
     wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
