@@ -27,6 +27,10 @@ install:
 script:
   - "[ -z $TRAVIS_TAG ] || ./build"
 
+cache:
+  directories:
+  - $HOME/.cabal
+
 deploy:
   provider: releases
   api-key:
