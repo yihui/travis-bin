@@ -23,7 +23,7 @@ case $TARGET in
     export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
     tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
     # `tlmgr install bibtex` does not install apalike.sty, hence the hack
-    wget http://www.tex.ac.uk/ctan/biblio/bibtex/base/apalike.sty
+    wget http://ftp.cs.stanford.edu/tex/bibtex/apalike.sty
     mv apalike.sty ~/texlive/texmf-dist/tex/latex/
     mktexlsr
     equivs-build debian-*
