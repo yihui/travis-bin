@@ -11,9 +11,11 @@ biblatex
 bibtex
 blkarray
 booktabs
+boondox
 breakurl
 caption
 ccaption
+chemgreek
 cite
 cleveref
 collectbox
@@ -37,6 +39,7 @@ fancybox
 fancyvrb
 float
 floatrow
+fmtcount
 footmisc
 fp
 fpl
@@ -46,6 +49,7 @@ harvard
 helvetic
 inconsolata
 jknapltx
+kastrup
 kerkis
 koma-script
 l3experimental
@@ -90,6 +94,7 @@ rsfs
 sectsty
 setspace
 shadethm
+siunitx
 soul
 stmaryrd
 subfig
