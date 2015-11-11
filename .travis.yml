@@ -13,7 +13,6 @@ env:
     - PATH=$PATH:$HOME/.cabal/bin
   matrix:
     - TARGET=pandoc
-    - TARGET=r-devel
     - TARGET=texlive
 
 before_install:
