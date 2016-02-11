@@ -7,10 +7,12 @@ addons:
     packages:
     - haskell-platform
     - equivs
+    - python
 
 env:
   global:
     - PATH=$PATH:$HOME/.cabal/bin
+    - secure: "IgL7VLZZHlfr93XZJr3aO7z4wQEG+QxfRBkfGDI+MqGwXnzePm6d9EJWizzzaN+VWbPzWrlxjGodycuDjH4aMbDn8l6Z504m/w6tkEKfezrB2B98C+OcRtf1qy/feEGc8skkhXW/XicGEPF9NAwSJLmSJBpXb9cR+BrqdT3q2HU="
   matrix:
     - TARGET=pandoc
     - TARGET=texlive
@@ -29,6 +31,9 @@ script:
 cache:
   directories:
   - $HOME/.cabal
+
+before_deploy:
+  - "[ -z $TRAVIS_TAG ] || [ -z $TARGET ] || python delete.py $TARGET"
 
 deploy:
   provider: releases
