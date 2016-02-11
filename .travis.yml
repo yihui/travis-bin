@@ -33,7 +33,7 @@ cache:
   - $HOME/.cabal
 
 before_deploy:
-  - "[ -z $TRAVIS_TAG ] || [ -z $TARGET ] || python delete.py $TARGET"
+  - "[ -z $TRAVIS_TAG ] || [ -z $TARGET ] || curl -s https://api.github.com/repos/yihui/ubuntu-bin/releases/latest | python delete.py $TARGET"
 
 deploy:
   provider: releases
