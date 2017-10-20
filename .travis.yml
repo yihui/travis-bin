@@ -21,11 +21,10 @@ before_install:
   - "if [ ! -z $COMMIT_TARGET ]; then if [ $COMMIT_TARGET != $TARGET ]; then export TARGET=''; fi; fi"
 
 install:
-  - "[ -z $TRAVIS_TAG ] && exit 0 || true"
   - ./install
 
 script:
-  - "[ -z $TRAVIS_TAG ] || ./build"
+  - ./build"
 
 cache:
   directories:
