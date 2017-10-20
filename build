@@ -1,35 +1,17 @@
 #!/bin/sh
 
-case $TARGET in
-  pandoc)
-    cd pandoc
-    stack setup
-    stack install --test
-    ls ~/.local/bin
-    pandoc --version
-    ;;
-  r-devel)
-    tar zxf R-latest.tar.gz
-    cd R-patched
-    ./tools/rsync-recommended
-    ./configure --prefix=$HOME/R-devel
-    make -j2 && make install
-    cd ..
-    rm -r R-*
-    tar zcf R-devel.tar.gz -C ~ R-devel
-    ;;
-  texlive)
-    tar zxf install-tl*
-    ./install-tl*/install-tl -profile TexLive.profile
-    export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
-    tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
-    mv apalike.sty ~/texlive/texmf-dist/tex/latex/
-    mktexlsr
-    equivs-build debian-*
-    mv texlive-local*.deb texlive-local.deb
-    tar zcf texlive.tar.gz -C ~ texlive
-    ;;
-  *)
-    echo "nothing to build"
-    ;;
-esac
+cd pandoc
+stack setup
+stack install --test
+ls ~/.local/bin
+pandoc --version
+
+tar zxf install-tl*
+./install-tl*/install-tl -profile TexLive.profile
+export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
+tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
+mv apalike.sty ~/texlive/texmf-dist/tex/latex/
+mktexlsr
+equivs-build debian-*
+mv texlive-local*.deb texlive-local.deb
+tar zcf texlive.tar.gz -C ~ texlive

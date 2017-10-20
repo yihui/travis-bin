@@ -7,31 +7,24 @@ addons:
     packages:
     - equivs
     - python
+    - pandoc-citeproc
 
 env:
   global:
     - PATH=$HOME/.local/bin:$PATH
-  matrix:
-    - TARGET=pandoc
-    - TARGET=texlive
 
 before_install:
   - mkdir -p $HOME/.local/bin
-  - export COMMIT_TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
-  - "if [ ! -z $COMMIT_TARGET ]; then if [ $COMMIT_TARGET != $TARGET ]; then export TARGET=''; fi; fi"
 
 install:
   - ./install
 
 script:
-  - ./build"
+  - ./build
 
 cache:
   directories:
   - $HOME/.stack
-
-before_deploy:
-  - "[ -z $TRAVIS_TAG ] || [ -z $TARGET ] || curl -s https://api.github.com/repos/yihui/ubuntu-bin/releases/latest | python delete.py $TARGET"
 
 deploy:
   provider: pages
