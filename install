@@ -5,8 +5,7 @@ case $TARGET in
     git clone https://github.com/jgm/pandoc
     cd pandoc
     git submodule update --init
-    cabal update
-    cabal install --only-dependencies
+    curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
     ;;
   r-devel)
     wget http://cran.rstudio.com/src/base-prerelease/R-latest.tar.gz

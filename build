@@ -3,13 +3,10 @@
 case $TARGET in
   pandoc)
     cd pandoc
-    cabal configure --flags="embed_data_files https"
-    cabal build
-    cabal test
-    cabal copy --destdir=./
-    ls
-    tar zcf pandoc.tar.gz pandoc pandoc-citeproc
-    rm pandoc pandoc-citeproc
+    stack setup
+    stack install --test
+    ls ~/.local/bin
+    pandoc --version
     ;;
   r-devel)
     tar zxf R-latest.tar.gz

@@ -10,13 +10,13 @@ addons:
 
 env:
   global:
-    - PATH=$PATH:$HOME/.cabal/bin
-    - secure: "IgL7VLZZHlfr93XZJr3aO7z4wQEG+QxfRBkfGDI+MqGwXnzePm6d9EJWizzzaN+VWbPzWrlxjGodycuDjH4aMbDn8l6Z504m/w6tkEKfezrB2B98C+OcRtf1qy/feEGc8skkhXW/XicGEPF9NAwSJLmSJBpXb9cR+BrqdT3q2HU="
+    - PATH=$HOME/.local/bin:$PATH
   matrix:
     - TARGET=pandoc
     - TARGET=texlive
 
 before_install:
+  - mkdir -p $HOME/.local/bin
   - export COMMIT_TARGET="$(git log --format=%B --no-merges -n 1 | grep -E "\[build .+\]" | sed 's/.*\[build \(.*\)\].*/\1/')"
   - "if [ ! -z $COMMIT_TARGET ]; then if [ $COMMIT_TARGET != $TARGET ]; then export TARGET=''; fi; fi"
 
@@ -29,21 +29,15 @@ script:
 
 cache:
   directories:
-  - $HOME/.cabal
+  - $HOME/.stack
 
 before_deploy:
   - "[ -z $TRAVIS_TAG ] || [ -z $TARGET ] || curl -s https://api.github.com/repos/yihui/ubuntu-bin/releases/latest | python delete.py $TARGET"
 
 deploy:
-  provider: releases
-  api-key:
-    secure: "Lf3cMSpdhZ/2Xd4U1ty+uycfhuYaBylOJMBmSkiIkUoVVsIA51wGCfCwDV4+5vaCnWISmHGBcdzi5uLsRdN/0FyVjP9py5edrJdgX4OQJTozfalB+fz4P4zdaMDdnvQgEsSDez4O8sHoHAhkz0K9I+zVswGlpD/+3udqIohdxTo="
-  file:
-    - pandoc*
-    - texlive*
-  file_glob: true
+  provider: pages
   skip_cleanup: true
+  github_token: $GH_TOKEN
+  local_dir: ~/.local/bin
   on:
-    tags: true
-    all_branches: true
-    condition: $TARGET != ""
+    branch: master
