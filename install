@@ -2,8 +2,11 @@
 
 case $TARGET in
   pandoc)
+    git clone https://github.com/jgm/pandoc
+    cd pandoc
+    git submodule update --init
     cabal update
-    cabal install hsb2hs
+    cabal install --only-dependencies
     ;;
   r-devel)
     wget http://cran.rstudio.com/src/base-prerelease/R-latest.tar.gz
