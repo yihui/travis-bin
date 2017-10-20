@@ -17,7 +17,7 @@ before_install:
   - mkdir -p $HOME/.local/bin
 
 install:
-  - ./install
+  - true
 
 script:
   - ./build
@@ -30,6 +30,6 @@ deploy:
   provider: pages
   skip_cleanup: true
   github_token: $GH_TOKEN
-  local_dir: ~/.local/bin
+  local_dir: dist
   on:
     branch: master
