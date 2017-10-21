@@ -1,4 +1,5 @@
 #!/bin/sh
+set -x
 
 git clone https://github.com/jgm/pandoc
 cd pandoc
