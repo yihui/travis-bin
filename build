@@ -8,7 +8,7 @@ stack --version
 rm stack.yaml && mv stack.pkg.yaml stack.yaml
 stack setup
 stack install --test
-ls ~/.local/bin
+ls -ls ~/.local/bin
 pandoc --version
 
 cd ..
