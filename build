@@ -23,10 +23,13 @@ export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
 tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
 mv apalike.sty ~/texlive/texmf-dist/tex/latex/
 mktexlsr
+tar zcf texlive.tar.gz -C ~ texlive
+
 equivs-build debian-*
 mv texlive-local*.deb texlive-local.deb
-tar zcf texlive.tar.gz -C ~ texlive
 
 mkdir dist
 mv texlive.tar.gz texlive-local.deb dist/
 cp ~/.local/bin/pandoc dist/
+cd dist
+../index.sh > index.html
