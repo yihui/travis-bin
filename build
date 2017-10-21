@@ -5,6 +5,7 @@ cd pandoc
 git submodule update --init
 curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
 stack --version
+rm stack.yaml && mv stack.pkg.yaml stack.yaml
 stack setup
 stack install --test
 ls ~/.local/bin
@@ -31,5 +32,4 @@ mv texlive-local*.deb texlive-local.deb
 mkdir dist
 mv texlive.tar.gz texlive-local.deb dist/
 cp ~/.local/bin/pandoc dist/
-cd dist
-../index.sh > index.html
+./index.sh > dist/index.html
