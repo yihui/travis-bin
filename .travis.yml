@@ -34,6 +34,7 @@ script:
 
   - cd ..
   - sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
+  - cat TexLive.profile
   - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
   - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
   # `tlmgr install bibtex` does not install apalike.sty, hence the hack
