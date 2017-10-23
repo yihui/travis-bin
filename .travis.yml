@@ -20,7 +20,7 @@ install:
   - true
 
 script:
-  - git clone https://github.com/jgm/pandoc
+  - git clone --depth=50 https://github.com/jgm/pandoc
   - cd pandoc
   - git submodule update --init
   - curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
