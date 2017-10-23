@@ -1,3 +1,3 @@
 #!/bin/sh
 
-tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
+tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ') || true
