@@ -27,7 +27,7 @@ script:
   - stack --version
   - rm stack.yaml && mv stack.pkg.yaml stack.yaml
   - stack setup
-  - travis_wait stack install --test
+  - stack install --test --cabal-verbose
   - ls -lh ~/.local/bin
   - pandoc --version
   - pandoc-citeproc --version
