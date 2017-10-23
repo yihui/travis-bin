@@ -20,7 +20,40 @@ install:
   - true
 
 script:
-  - ./build
+  - git clone https://github.com/jgm/pandoc
+  - cd pandoc
+  - git submodule update --init
+  - curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - stack --version
+  - rm stack.yaml && mv stack.pkg.yaml stack.yaml
+  - stack setup
+  - travis_wait stack install --test
+  - ls -lh ~/.local/bin
+  - pandoc --version
+  - pandoc-citeproc --version
+
+  - cd ..
+  - sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
+  - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+  - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
+  # `tlmgr install bibtex` does not install apalike.sty, hence the hack
+  - wget http://ftp.cs.stanford.edu/tex/bibtex/apalike.sty
+
+  - tar zxf install-tl*
+  - ./install-tl*/install-tl -profile TexLive.profile
+  - export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
+  - tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
+  - mv apalike.sty ~/texlive/texmf-dist/tex/latex/
+  - mktexlsr
+  - tar zcf texlive.tar.gz -C ~ texlive
+
+  - equivs-build debian-*
+  - mv texlive-local*.deb texlive-local.deb
+
+  - mkdir dist
+  - mv texlive.tar.gz texlive-local.deb dist/
+  - cp ~/.local/bin/pandoc dist/
+  - ./index.sh > dist/index.html
 
 cache:
   directories:
