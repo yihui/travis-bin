@@ -42,7 +42,7 @@ script:
   - tar zxf install-tl*
   - ./install-tl*/install-tl -profile TexLive.profile
   - export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
-  - tlmgr install $(cat TeXLive.pkgs | tr '\n' ' ')
+  - ./install-tl-pkgs.sh
   - mv apalike.sty ~/texlive/texmf-dist/tex/latex/
   - mktexlsr
   - tar zcf texlive.tar.gz -C ~ texlive
