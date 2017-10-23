@@ -53,7 +53,7 @@ script:
 
   - mkdir dist
   - mv texlive.tar.gz texlive-local.deb dist/
-  - cp ~/.local/bin/pandoc dist/
+  - cp ~/.local/bin/pandoc* dist/
   - ./index.sh > dist/index.html
 
 cache:
