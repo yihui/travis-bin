@@ -7,7 +7,6 @@ addons:
     packages:
     - equivs
     - python
-    - pandoc-citeproc
 
 env:
   global:
