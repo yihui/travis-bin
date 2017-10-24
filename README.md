@@ -7,8 +7,7 @@ relatively long time to compile packages from source. As someone who is always
 impatient with software packages that are years behind their latest versions,
 I'm trying to build the binaries for a few packages such as `pandoc`,
 `pandoc-citeproc`, and `TeXLive` on the Travis CI platform and upload them to
-back to this repository using the awesome [Github
-releases](https://help.github.com/articles/about-releases/). The main purpose is
+back to this repository in the `gh-pages` branch. The main purpose is
 for checking R packages with LaTeX dependencies or R Markdown v2 vignettes on
 Travis CI (e.g. the [crandalf](https://github.com/yihui/crandalf) project).
 Unless you understand what I'm doing here, you are not recommended to download
@@ -27,7 +26,7 @@ in the latest version of Pandoc (well, I really wish we could find no problems).
 There is no magic in `.travis.yml`:
 
 - For Pandoc, everything was basically taken from
-  <http://johnmacfarlane.net/pandoc/installing.html>. Many thanks to the author
+  <http://pandoc.org/installing.html>. Many thanks to the author
   and contributors of Pandoc for making such a great package, and also to the
   Travis CI team. I believe both have changed the world.
 - For TeXLive, I just create a portable TeXLive tar ball, which is a minimal
@@ -37,8 +36,4 @@ There is no magic in `.travis.yml`:
   using @scottkosty's
   [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu) repo.
 
-This repository only has one tag/release, which is always `latest`, and the
-binaries can be downloaded at:
-https://github.com/yihui/pandoc-ubuntu/releases/tag/latest It takes about 22
-minutes to rebuild and release `pandoc` and `pandoc-citeproc`, and 3 minutes for
-`texlive` on Travis.
+The binaries are served at <https://travis-bin.yihui.name>.
