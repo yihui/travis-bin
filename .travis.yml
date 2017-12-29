@@ -39,14 +39,11 @@ script:
   - cat TexLive.profile
   - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
   - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
-  # `tlmgr install bibtex` does not install apalike.sty, hence the hack
-  - wget http://ftp.cs.stanford.edu/tex/bibtex/apalike.sty
 
   - tar zxf install-tl*
   - ./install-tl*/install-tl -profile TexLive.profile
   - export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
   - ./install-more-tl-pkgs.sh
-  - mv apalike.sty ~/texlive/texmf-dist/tex/latex/
   - mktexlsr
   - tar zcf texlive.tar.gz -C ~ texlive
 
