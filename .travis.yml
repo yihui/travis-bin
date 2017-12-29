@@ -21,15 +21,10 @@ install:
 script:
   - curl -L https://www.stackage.org/stack/linux-x86_64 | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
   - stack --version
-  - git clone --depth=50 https://github.com/jgm/pandoc-citeproc
-  - cd pandoc-citeproc
-  - stack setup
-  - stack install --test --flag 'pandoc-citeproc:embed_data_files'
-  - cd ..
   - git clone --depth=50 https://github.com/jgm/pandoc
   - cd pandoc
   - stack setup
-  - stack install --test
+  - stack install --test pandoc pandoc-citeproc
   - ls -lh ~/.local/bin
   - pandoc --version
   - pandoc-citeproc --version
