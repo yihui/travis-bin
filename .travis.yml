@@ -47,8 +47,8 @@ script:
   - mv texlive-local*.deb texlive-local.deb
 
   - mkdir dist
-  - mv texlive.tar.gz texlive-local.deb dist/
-  - cp ~/.local/bin/pandoc* dist/
+  - tar zcf pandoc.tar.gz ~/.local/bin/pandoc*
+  - mv pandoc.tar.gz texlive.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
 
 cache:
