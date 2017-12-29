@@ -25,7 +25,7 @@ script:
   - cd pandoc
   - 'echo "allow-newer: true" >> stack.yaml'
   - stack setup
-  - stack install --test pandoc pandoc-citeproc
+  - stack install --ghc-options="-O2" --test pandoc pandoc-citeproc
   - ls -lh ~/.local/bin
   - pandoc --version
   - pandoc-citeproc --version
