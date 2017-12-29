@@ -23,6 +23,7 @@ script:
   - stack --version
   - git clone --depth=50 https://github.com/jgm/pandoc
   - cd pandoc
+  - echo 'allow-newer: true' >> stack.yaml
   - stack setup
   - stack install --test pandoc pandoc-citeproc
   - ls -lh ~/.local/bin
