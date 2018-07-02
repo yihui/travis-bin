@@ -25,10 +25,10 @@ script:
   - cd pandoc
   - 'echo "allow-newer: true" >> stack.yaml'
   - stack setup
-  - travis_wait stack install --ghc-options="-O2" pandoc pandoc-citeproc
+  - travis_wait stack install --ghc-options="-O2" pandoc pandoc-citeproc || true
   - ls -lh ~/.local/bin
-  - pandoc --version
-  - pandoc-citeproc --version
+  - pandoc --version || true
+  - pandoc-citeproc --version || true
 
   - cd ..
   - sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
@@ -47,7 +47,7 @@ script:
   - mv texlive-local*.deb texlive-local.deb
 
   - mkdir dist
-  - tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc
+  - "[ -f ~/.local/bin/pandoc ] && tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc || wget https://travis-bin.yihui.name/pandoc.tar.gz"
   - mv pandoc.tar.gz texlive.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
 
