@@ -10,9 +10,10 @@ addons:
 
 env:
   global:
-    - PATH=$HOME/.local/bin:$PATH
+    - PATH=$HOME/bin:$HOME/.local/bin:$PATH
 
 before_install:
+  - mkdir -p $HOME/bin
   - mkdir -p $HOME/.local/bin
 
 install:
@@ -31,24 +32,18 @@ script:
   - pandoc-citeproc --version || true
 
   - cd ..
-  - sed -i 's@\$HOME@'"$HOME"'@' TexLive.profile
-  - cat TexLive.profile
-  - wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+  - wget -qO- "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | sh
+  - tlmgr --version
+  - pdflatex --version
+  - tar zcf tinytex.tar.gz -C ~ .TinyTeX
+
   - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
-
-  - tar zxf install-tl*
-  - ./install-tl*/install-tl -profile TexLive.profile
-  - export PATH=$PATH:$HOME/texlive/bin/x86_64-linux
-  - ./install-more-tl-pkgs.sh
-  - mktexlsr
-  - tar zcf texlive.tar.gz -C ~ texlive
-
   - equivs-build debian-*
   - mv texlive-local*.deb texlive-local.deb
 
   - mkdir dist
   - "[ -f ~/.local/bin/pandoc ] && tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc || wget https://travis-bin.yihui.name/pandoc.tar.gz"
-  - mv pandoc.tar.gz texlive.tar.gz texlive-local.deb dist/
+  - mv pandoc.tar.gz tinytex.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
 
 cache:
