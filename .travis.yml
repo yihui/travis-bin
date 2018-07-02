@@ -42,7 +42,7 @@ script:
   - mv texlive-local*.deb texlive-local.deb
 
   - mkdir dist
-  - "[ -f ~/.local/bin/pandoc ] && tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc || wget https://travis-bin.yihui.name/pandoc.tar.gz"
+  - "[ -f ~/.local/bin/pandoc ] && tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc || wget -q https://travis-bin.yihui.name/pandoc.tar.gz"
   - mv pandoc.tar.gz tinytex.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
 
