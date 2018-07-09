@@ -33,6 +33,8 @@ script:
 
   - cd ..
   - wget -qO- "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | sh
+  - which tlmgr
+  - which pdflatex
   - tlmgr --version
   - pdflatex --version
   - tar zcf tinytex.tar.gz -C ~ .TinyTeX
