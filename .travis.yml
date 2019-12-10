@@ -24,7 +24,7 @@ script:
   - git clone --depth=50 https://github.com/jgm/pandoc
   - cd pandoc
   - stack setup
-  - travis_wait stack install pandoc pandoc-citeproc || true
+  - travis_wait 40 stack install pandoc pandoc-citeproc || true
   - ls -lh ~/.local/bin
   - pandoc --version || true
   - pandoc-citeproc --version || true
