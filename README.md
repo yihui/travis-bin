@@ -30,9 +30,9 @@ There is no magic in `.travis.yml`:
   and contributors of Pandoc for making such a great package, and also to the
   Travis CI team. I believe both have changed the world.
 - For TeXLive, I just create a portable TeXLive tar ball, which is a minimal
-  TeXLive installation named [TinyTeX](https://yihui.name/tinytex/). To make
+  TeXLive installation named [TinyTeX](https://yihui.org/tinytex/). To make
   sure Ubuntu no longer installs the official texlive packages, a dummy Debian
   package is built using @scottkosty's
   [install-tl-ubuntu](https://github.com/scottkosty/install-tl-ubuntu) repo.
 
-The binaries are served at <https://travis-bin.yihui.name>.
+The binaries are served at <https://travis-bin.yihui.org>.
