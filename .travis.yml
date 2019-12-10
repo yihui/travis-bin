@@ -25,8 +25,7 @@ script:
   - cd pandoc
   - stack setup
   - travis_wait 40 stack build pandoc pandoc-citeproc || true
-  - ls -lhR .stack-work
-  - cp .stack-work/install/{pandoc,pandoc-citeproc} ~/.local/bin
+  - for f in $(find .stack-work/install -name 'pandoc*' -executable -type f); do cp $f ~/.local/bin; done
   - ls -lh ~/.local/bin
   - pandoc --version || true
   - pandoc-citeproc --version || true
