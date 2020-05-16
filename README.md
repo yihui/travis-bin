@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/yihui/travis-bin.svg)](https://travis-ci.org/yihui/travis-bin)
+[![Build Status](https://travis-ci.com/yihui/travis-bin.svg)](https://travis-ci.com/yihui/travis-bin)
 
 It is painful to install the latest version of Pandoc or TeXLive on
 Ubuntu/Debian. It is not that you cannot do it, nor is it super difficult.
