@@ -20,9 +20,10 @@ install:
 script:
   - wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
   - tar xzf tinytex.tar.gz -C $HOME
-  - alias tlmgr=$HOME/.TinyTeX/bin/*/tlmgr
+  - cd $HOME/.TinyTeX/bin/*
   - tlmgr option sys_bin ~/bin
   - tlmgr path add
+  - cd $TRAVIS_BUILD_DIR
 
   - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
   - equivs-build debian-*
