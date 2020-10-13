@@ -1,5 +1,4 @@
-language: haskell
-dist: bionic
+language: c
 
 addons:
   apt:
@@ -8,49 +7,24 @@ addons:
 
 env:
   global:
-    - PATH=$HOME/bin:$HOME/.local/bin:$PATH
+    - PATH=$HOME/bin:$PATH
 
 before_install:
   - mkdir -p $HOME/bin
-  - mkdir -p $HOME/.local/bin
 
 install:
   - true
 
 script:
-  - curl -sSL https://get.haskellstack.org/ | sudo sh
-  - stack --version
-  - git clone --depth=50 https://github.com/jgm/pandoc
-  - cd pandoc
-  - stack setup
-  - travis_wait 40 stack build pandoc pandoc-citeproc || true
-  - for f in $(find .stack-work/install -name 'pandoc*' -executable -type f); do cp $f ~/.local/bin; done
-  - ls -lh ~/.local/bin
-  - pandoc --version || true
-  - pandoc-citeproc --version || true
-
-  - cd ..
-  - wget -qO- "https://github.com/yihui/tinytex/raw/master/tools/install-unx.sh" | sh
-  - which tlmgr
-  - which pdflatex
-  - tlmgr --version
-  - pdflatex --version
-  - tar zcf tinytex.tar.gz -C ~ .TinyTeX
+  - wget -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX.tar.gz
 
   - wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
   - equivs-build debian-*
   - mv texlive-local*.deb texlive-local.deb
 
   - mkdir dist
-  - "[ -f ~/.local/bin/pandoc ] && tar zcf pandoc.tar.gz -C ~/.local/bin pandoc pandoc-citeproc || wget -q https://travis-bin.yihui.org/pandoc.tar.gz"
-  - mv pandoc.tar.gz tinytex.tar.gz texlive-local.deb dist/
+  - mv tinytex.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
-
-cache:
-  directories:
-  - $HOME/.ghc
-  - $HOME/.cabal
-  - $HOME/.stack
 
 deploy:
   provider: pages
