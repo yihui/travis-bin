@@ -4,6 +4,7 @@ addons:
   apt:
     packages:
     - jq
+    - equivs-build
 
 env:
   global:
