@@ -11,6 +11,7 @@ env:
 
 before_install:
   - mkdir -p $HOME/bin
+  - mkdir dist
 
 install:
   - true
@@ -24,8 +25,10 @@ script:
   - equivs-build debian-*
   - mv texlive-local*.deb texlive-local.deb
 
-  - mkdir dist
-  - mv tinytex.tar.gz texlive-local.deb dist/
+  - latest_url=$(curl -H "Accept: application/vnd.github.v3+json" https://api.github.com/repos/jgm/pandoc/actions/artifacts | jq -r '.artifacts| map(select(.name == "nightly-linux")) | .[0].archive_download_url'
+  - curl -L -o pandoc-linux.zip -u :$GH_TOKEN $latest_url
+  - unzip -j -d $HOME/bin pandoc-linux.zip
+  - mv pandoc-linux.zip tinytex.tar.gz texlive-local.deb dist/
   - ./index.sh > dist/index.html
 
 deploy:

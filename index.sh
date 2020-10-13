@@ -6,8 +6,6 @@ for i in `ls dist`; do [ ${i} = "index.html" ] || echo "<li><a href=\"$i\">$i</a
 echo '</ul><pre>'
 pandoc --version
 echo
-pandoc-citeproc --version
-echo
 tlmgr --version
 echo '</pre><p>Last updated on '
 date
