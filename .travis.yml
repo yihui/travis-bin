@@ -18,7 +18,7 @@ install:
   - true
 
 script:
-  - wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX.tar.gz
+  - wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
   - tar xzf tinytex.tar.gz -C $HOME
   - alias tlmgr=$HOME/.TinyTeX/bin/*/tlmgr
 
