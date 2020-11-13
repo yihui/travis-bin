@@ -18,7 +18,7 @@ jobs:
           })
     - name: download latest
       run: | 
-        echo ${{steps.artifacts.outputs.result}} | jq .
+        echo '${{steps.artifacts.outputs.result}}' | jq .
 
   deploy-pandoc:
     needs: [build-pandoc]
