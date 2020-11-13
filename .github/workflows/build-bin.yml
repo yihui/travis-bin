@@ -31,9 +31,13 @@ jobs:
             artifact_id: ${{ steps.latest-artifact.outputs.artifactId }},
             archive_format: "zip",
           });
-    - name: url
+    - name: download artifact
       run: |
-        echo '${{steps.artifact.outputs.result}}' | jq .
+        curl -L -o pandoc-linux.zip $(echo '${{steps.artifact.outputs.result}}' | jq -r '.url')
+    - uses: actions/upload-artifact@v2
+      with:
+        name: pandoc-linux-daily
+        path: pandoc-linux.zip
 
   deploy-pandoc:
     needs: [build-pandoc]
