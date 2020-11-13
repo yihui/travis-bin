@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - name: install deps
-      run: sudo apt-get install -y jq
+      run: | 
+        sudo apt-get install -y jq
+        jq --version
     - name: Get Artifacts
       id: artifacts
       uses: actions/github-script@v3
@@ -21,7 +23,7 @@ jobs:
           })
     - name: download latest
       run: | 
-        echo $('${{steps.artifacts.outputs.result}}' | jq -r '.artifacts| map(select(.name == "nightly-linux")) | .[0].archive_download_url')
+        echo $(${{steps.artifacts.outputs.result}} | jq -r '.artifacts| map(select(.name == "nightly-linux")) | .[0].archive_download_url')
 
   deploy-pandoc:
     needs: [build-pandoc]
