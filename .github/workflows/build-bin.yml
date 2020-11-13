@@ -42,6 +42,7 @@ jobs:
         cat .pandoc-version.txt
     - name: Upload as artifact
       uses: actions/upload-artifact@v2
+      retention-days: 5
       with:
         name: binaries
         path: |
@@ -69,6 +70,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: binaries
+          retention-days: 5
           path: |
             tinytex.tar.gz
             .tinytex-version.txt
@@ -80,6 +82,7 @@ jobs:
           mv texlive-local*.deb texlive-local.deb
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
+        retention-days: 5
         with:
           name: binaries
           path: texlive-local.deb
