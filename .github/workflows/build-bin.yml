@@ -26,9 +26,9 @@ jobs:
       with:
         script: |
           return await github.actions.downloadArtifact({
-            owner = "jgm",
-            repo = "pandoc",
-            artifact_id = ${{ steps.latest-artifact.outputs.artifactId }},
+            owner: "jgm",
+            repo: "pandoc",
+            artifact_id: ${{ steps.latest-artifact.outputs.artifactId }},
             archive_format: "zip",
           });
     - name: url
