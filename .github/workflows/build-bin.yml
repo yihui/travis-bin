@@ -39,7 +39,6 @@ jobs:
       with:
         name: pandoc-linux-daily
         path: pandoc-linux.zip
-    - run: echo $PATH
     - name: Pandoc version
       run: |
         unzip -j -d ~/bin pandoc-linux.zip
