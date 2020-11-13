@@ -50,19 +50,23 @@ jobs:
       name: TinyTeX
       runs-on: ubuntu-20.04
       steps:
-      - name: Download TinyTeX
+      - name: Download and install TinyTeX
         run: |
           wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
           tar xzf tinytex.tar.gz -C $HOME
-          cd $HOME/.TinyTeX/bin/*
-          ls -a ~/bin
-          ./tlmgr option sys_bin ~/bin
-          ./tlmgr path add
-          ls -a ~/bin
           echo "$HOME/.TinyTeX/bin/" >> $GITHUB_PATH
-          echo $PATH
-          cd $GITHUB_WORKSPACE
-      - run: echo $PATH
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: tinytex-linux
+          path: tinytex.tar.gz
+      - name: TinyTeX version
+      run: |
+        unzip -j -d ~/bin pandoc-linux.zip
+        chmod +x ~/bin/pandoc
+        tlmgr --version > ~/tinytex.txt
+        cat ~/tinytex.txt
+        cat ~/pandoc.txt
 
   deploy-pandoc:
     needs: [build-pandoc]
