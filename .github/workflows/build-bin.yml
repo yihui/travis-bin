@@ -4,7 +4,7 @@ name: build-bin
 
 jobs:
   build-pandoc:
-    name: Get daily pandoc binary
+    name: Pandoc
     runs-on: ubuntu-20.04
     steps:
     - name: Get pandoc artifacts list
@@ -47,7 +47,7 @@ jobs:
         path: pandoc*
 
   build-tinytex:
-      name: TinyTeX
+      name: TinyTeX / TeX Live
       runs-on: ubuntu-20.04
       steps:
       - name: Download and install TinyTeX
@@ -89,7 +89,10 @@ jobs:
       with:
         name: binaries
         path: dist
-    - run: ls -R dist
+    - name: Run index script
+        run: ./.github/scripts/index.sh > dist/index.html
+        shell: bash
+    - run: cat dist/index.html
     - name: Deploy
       if: ${{false}}
       uses: peaceiris/actions-gh-pages@v3
