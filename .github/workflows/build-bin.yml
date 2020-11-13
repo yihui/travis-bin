@@ -1,0 +1,25 @@
+on: [workflow_dispatch, pull_request]
+
+name: build-bin
+
+jobs:
+  build-pandoc:
+    name: Get daily pandoc binary
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Get Artifacts
+      id: artifacts
+      uses: actions/github-script@v3
+      with: 
+        script: |
+          github.actions.listArtifactsForRepo({
+            "jgm",
+            "pandoc",
+          });
+    - run: echo "${{steps.artifacts.outputs.result}}"     
+
+  deploy-pandoc:
+    needs: [build-pandoc]
+    name: deploy built binary
+    steps:
+    - run: echo 'not deploying at the moment'
