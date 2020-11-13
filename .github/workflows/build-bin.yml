@@ -33,7 +33,7 @@ jobs:
           });
     - name: url
       run: |
-        echo '${{steps.artifacts.outputs.result}}' | jq .
+        echo '${{steps.artifact.outputs.result}}' | jq .
 
   deploy-pandoc:
     needs: [build-pandoc]
