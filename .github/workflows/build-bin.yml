@@ -45,6 +45,19 @@ jobs:
         chmod +x ~/bin/pandoc
         ~/bin/pandoc --version > ~/pandoc.txt
         cat ~/pandoc.txt
+  build-tinytex:
+      name: TinyTeX
+      runs-on: ubuntu-20.04
+      steps:
+      - name: Download TinyTeX
+        run: |
+          wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
+          tar xzf tinytex.tar.gz -C $HOME
+          cd $HOME/.TinyTeX/bin/*
+          ./tlmgr option sys_bin ~/bin
+          ./tlmgr path add
+          echo $PATH
+          cd $GITHUB_WORKSPACE
 
   deploy-pandoc:
     needs: [build-pandoc]
