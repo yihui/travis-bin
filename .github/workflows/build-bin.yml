@@ -4,7 +4,6 @@ name: build-bin
 
 jobs:
   build-pandoc:
-    if: ${{ false }}
     name: Get daily pandoc binary
     runs-on: ubuntu-20.04
     steps:
@@ -35,17 +34,18 @@ jobs:
     - name: Download artifact
       run: |
         curl -L -o pandoc-linux.zip $(echo '${{steps.artifact.outputs.result}}' | jq -r '.url')
-    - name: Upload as artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: pandoc-linux-daily
-        path: pandoc-linux.zip
     - name: Pandoc version
       run: |
         unzip -j -d ~/bin pandoc-linux.zip
         chmod +x ~/bin/pandoc
-        ~/bin/pandoc --version > ~/pandoc.txt
-        cat ~/pandoc.txt
+        ~/bin/pandoc --version > pandoc-version.txt
+        cat pandoc-version.txt
+    - name: Upload as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: pandoc-linux-daily
+        path: pandoc*
+
   build-tinytex:
       name: TinyTeX
       runs-on: ubuntu-20.04
@@ -58,17 +58,17 @@ jobs:
           ./tlmgr option sys_bin ~/bin
           ./tlmgr path add
           echo "~/bin" >> $GITHUB_PATH
+      - name: TinyTeX version
+        run: |
+          echo $PATH
+          tlmgr --version > tinytex-version.txt
+          cat tinytex-version.txt
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
         with:
           name: tinytex-linux
-          path: tinytex.tar.gz
-      - name: TinyTeX version
-        run: |
-          echo $PATH
-          tlmgr --version > ~/tinytex.txt
-          cat ~/tinytex.txt
-          cat ~/pandoc.txt
+          path: tinytex*
+
 
   deploy-pandoc:
     needs: [build-pandoc]
