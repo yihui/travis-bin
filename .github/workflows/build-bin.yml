@@ -7,6 +7,8 @@ jobs:
     name: Get daily pandoc binary
     runs-on: ubuntu-20.04
     steps:
+    - name: install deps
+      run: sudo apt-get install -y jq
     - name: Get Artifacts
       id: artifacts
       uses: actions/github-script@v3
@@ -15,8 +17,11 @@ jobs:
          return await github.actions.listArtifactsForRepo({
             owner: "jgm",
             repo: "pandoc",
-          });
-    - run: echo "${{steps.artifacts.outputs.result}}"     
+          })
+    - name: download latest
+      run: | 
+        latest-url = "${{steps.artifacts.outputs.result}}" | jq -r ''.artifacts| map(select(.name == "nightly-linux")) | .[0].archive_download_url'')
+        echo $latest-url
 
   deploy-pandoc:
     needs: [build-pandoc]
