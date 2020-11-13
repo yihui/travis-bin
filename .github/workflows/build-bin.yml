@@ -1,4 +1,8 @@
-on: [workflow_dispatch, pull_request]
+on: 
+  schedule:
+    # run daily after pandoc nightly build
+    - cron: '55 8 * * *'
+
 
 name: build-bin
 
