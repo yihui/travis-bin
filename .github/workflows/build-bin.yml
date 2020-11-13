@@ -12,7 +12,7 @@ jobs:
       uses: actions/github-script@v3
       with: 
         script: |
-          github.actions.listArtifactsForRepo({
+         return await github.actions.listArtifactsForRepo({
             owner: "jgm",
             repo: "pandoc",
           });
