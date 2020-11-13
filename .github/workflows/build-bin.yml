@@ -7,7 +7,7 @@ jobs:
     name: Get daily pandoc binary
     runs-on: ubuntu-20.04
     steps:
-    - name: Get Artifacts
+    - name: Get pandoc artifacts list
       id: artifacts
       uses: actions/github-script@v3
       with: 
@@ -16,11 +16,11 @@ jobs:
             owner: "jgm",
             repo: "pandoc",
           })
-    - name: download latest
+    - name: Identify last nightly build for linux
       id: latest-artifact
       run: | 
         echo "::set-output name=artifactId::$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')"
-    - name: Get Artifact
+    - name: Get artifact download url
       id: artifact
       uses: actions/github-script@v3
       with:
@@ -31,10 +31,11 @@ jobs:
             artifact_id: ${{ steps.latest-artifact.outputs.artifactId }},
             archive_format: "zip",
           });
-    - name: download artifact
+    - name: Download artifact
       run: |
         curl -L -o pandoc-linux.zip $(echo '${{steps.artifact.outputs.result}}' | jq -r '.url')
-    - uses: actions/upload-artifact@v2
+    - name: Upload as artifact
+      uses: actions/upload-artifact@v2
       with:
         name: pandoc-linux-daily
         path: pandoc-linux.zip
