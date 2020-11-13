@@ -74,7 +74,11 @@ jobs:
           wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
           equivs-build debian-*
           mv texlive-local*.deb texlive-local.deb
-          ls 
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: textlive-local-deb
+          path: texlive-local.deb
 
   deploy-pandoc:
     needs: [build-pandoc]
