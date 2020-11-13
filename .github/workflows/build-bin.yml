@@ -54,9 +54,10 @@ jobs:
           wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
           tar xzf tinytex.tar.gz -C $HOME
           cd $HOME/.TinyTeX/bin/*
+          ls -a ~/bin
           ./tlmgr option sys_bin ~/bin
           ./tlmgr path add
-          ls ~/bin
+          ls -a ~/bin
           echo "$HOME/.TinyTeX/bin/" >> $GITHUB_PATH
           echo $PATH
           cd $GITHUB_WORKSPACE
