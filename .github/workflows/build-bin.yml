@@ -7,10 +7,6 @@ jobs:
     name: Get daily pandoc binary
     runs-on: ubuntu-20.04
     steps:
-    - name: install deps
-      run: | 
-        sudo apt-get install -y jq
-        jq --version
     - name: Get Artifacts
       id: artifacts
       uses: actions/github-script@v3
