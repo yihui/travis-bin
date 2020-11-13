@@ -17,8 +17,11 @@ jobs:
             repo: "pandoc",
           })
     - name: download latest
+      id: latest-artifact
       run: | 
-        echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].archive_download_url'
+        latest-id = $(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')
+        echo "::set-output name=artifactId::$latest-id"
+    - run: echo ${{ steps.latest-artifact.outputs.artifactId }}
 
   deploy-pandoc:
     needs: [build-pandoc]
