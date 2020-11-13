@@ -18,7 +18,7 @@ jobs:
           })
     - name: download latest
       run: | 
-        echo $(${{steps.artifacts.outputs.result}} | jq -r '.artifacts| map(select(.name == "nightly-linux")) | .[0].archive_download_url')
+        ${{steps.artifacts.outputs.result}} | jq .
 
   deploy-pandoc:
     needs: [build-pandoc]
