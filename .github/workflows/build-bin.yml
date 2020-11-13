@@ -54,7 +54,10 @@ jobs:
         run: |
           wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
           tar xzf tinytex.tar.gz -C $HOME
-          echo "$HOME/.TinyTeX/bin/*" >> $GITHUB_PATH
+          cd $HOME/.TinyTeX/bin/*
+          ./tlmgr option sys_bin ~/bin
+          ./tlmgr path add
+          echo "~/bin" >> $GITHUB_PATH
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
         with:
