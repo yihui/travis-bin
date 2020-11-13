@@ -20,7 +20,20 @@ jobs:
       id: latest-artifact
       run: | 
         echo "::set-output name=artifactId::$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')"
-    - run: echo ${{ steps.latest-artifact.outputs.artifactId }}
+    - name: Get Artifact
+      id: artifact
+      uses: actions/github-script@v3
+      with:
+        script: |
+          return await github.actions.downloadArtifact({
+            owner = "jgm",
+            repo = "pandoc",
+            artifact_id = ${{ steps.latest-artifact.outputs.artifactId }},
+            archive_format: "zip",
+          });
+    - name: url
+      run: |
+        echo '${{steps.artifacts.outputs.result}}' | jq .
 
   deploy-pandoc:
     needs: [build-pandoc]
