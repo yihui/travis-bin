@@ -56,8 +56,11 @@ jobs:
           cd $HOME/.TinyTeX/bin/*
           ./tlmgr option sys_bin ~/bin
           ./tlmgr path add
+          ls ~/bin
+          echo "$HOME/.TinyTeX/bin/" >> $GITHUB_PATH
           echo $PATH
           cd $GITHUB_WORKSPACE
+      - run: echo $PATH
 
   deploy-pandoc:
     needs: [build-pandoc]
