@@ -19,8 +19,7 @@ jobs:
     - name: download latest
       id: latest-artifact
       run: | 
-        export latest-id=$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')
-        echo "::set-output name=artifactId::$latest-id"
+        echo "::set-output name=artifactId::$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')"
     - run: echo ${{ steps.latest-artifact.outputs.artifactId }}
 
   deploy-pandoc:
