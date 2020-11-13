@@ -38,13 +38,15 @@ jobs:
       run: |
         unzip -j -d ~/bin pandoc-linux.zip
         chmod +x ~/bin/pandoc
-        ~/bin/pandoc --version > pandoc-version.txt
-        cat pandoc-version.txt
+        ~/bin/pandoc --version > .pandoc-version.txt
+        cat .pandoc-version.txt
     - name: Upload as artifact
       uses: actions/upload-artifact@v2
       with:
         name: binaries
-        path: pandoc*
+        path: |
+          pandoc-linux.zip
+          .pandoc-version.txt
 
   build-tinytex:
       name: TinyTeX / TeX Live
@@ -61,13 +63,15 @@ jobs:
       - name: TinyTeX version
         run: |
           echo $PATH
-          tlmgr --version > tinytex-version.txt
-          cat tinytex-version.txt
+          tlmgr --version > .tinytex-version.txt
+          cat .tinytex-version.txt
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
         with:
           name: binaries
-          path: tinytex*
+          path: |
+            tinytex.tar.gz
+            .tinytex-version.txt
       - name: build texlive-local-deb
         run: |
           sudo apt-get install -y equivs
