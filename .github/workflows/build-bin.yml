@@ -13,8 +13,8 @@ jobs:
       with: 
         script: |
           github.actions.listArtifactsForRepo({
-            repo: "jgm",
-            owner: "pandoc",
+            owner: "jgm",
+            repo: "pandoc",
           });
     - run: echo "${{steps.artifacts.outputs.result}}"     
 
