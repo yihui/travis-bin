@@ -86,9 +86,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
     - uses: actions/download-artifact@v2
-        with:
-          name: homework
-          path: dist
+      with:
+        name: homework
+        path: dist
     - run: ls -R dist
     - name: Deploy
       if: $$ {false}
