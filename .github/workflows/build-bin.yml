@@ -15,7 +15,6 @@ jobs:
       id: artifacts
       uses: actions/github-script@v3
       with: 
-        result-encoding: string
         script: |
          return await github.actions.listArtifactsForRepo({
             owner: "jgm",
