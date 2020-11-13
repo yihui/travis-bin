@@ -4,6 +4,7 @@ name: build-bin
 
 jobs:
   build-pandoc:
+    if: ${{ false }}
     name: Get daily pandoc binary
     runs-on: ubuntu-20.04
     steps:
