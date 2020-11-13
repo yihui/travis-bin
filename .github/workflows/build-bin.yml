@@ -43,7 +43,7 @@ jobs:
     - name: Upload as artifact
       uses: actions/upload-artifact@v2
       with:
-        name: pandoc-linux-daily
+        name: binaries
         path: pandoc*
 
   build-tinytex:
@@ -66,7 +66,7 @@ jobs:
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: tinytex-linux
+          name: binaries
           path: tinytex*
       - name: build texlive-local-deb
         run: |
@@ -77,12 +77,22 @@ jobs:
       - name: Upload as artifact
         uses: actions/upload-artifact@v2
         with:
-          name: textlive-local-deb
+          name: binaries
           path: texlive-local.deb
 
-  deploy-pandoc:
-    needs: [build-pandoc]
+  deploy:
+    needs: [build-pandoc, build-tinytex]
     name: deploy built binary
     runs-on: ubuntu-20.04
     steps:
-    - run: echo 'not deploying at the moment'
+    - uses: actions/download-artifact@v2
+        with:
+          name: homework
+          path: dist
+    - run: ls -R dist
+    - name: Deploy
+      if: $$ {false}
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
