@@ -61,12 +61,12 @@ jobs:
           name: tinytex-linux
           path: tinytex.tar.gz
       - name: TinyTeX version
-      run: |
-        unzip -j -d ~/bin pandoc-linux.zip
-        chmod +x ~/bin/pandoc
-        tlmgr --version > ~/tinytex.txt
-        cat ~/tinytex.txt
-        cat ~/pandoc.txt
+        run: |
+          unzip -j -d ~/bin pandoc-linux.zip
+          chmod +x ~/bin/pandoc
+          tlmgr --version > ~/tinytex.txt
+          cat ~/tinytex.txt
+          cat ~/pandoc.txt
 
   deploy-pandoc:
     needs: [build-pandoc]
