@@ -2,9 +2,6 @@ on: [workflow_dispatch, pull_request]
 
 name: build-bin
 
-env:
-  PATH: $HOME/bin:$PATH
-
 jobs:
   build-pandoc:
     name: Get daily pandoc binary
@@ -47,7 +44,7 @@ jobs:
       run: |
         unzip -j -d ~/bin pandoc-linux.zip
         chmod +x ~/bin/pandoc
-        pandoc --version > ~/pandoc.txt
+        ~/bin/pandoc --version > ~/pandoc.txt
         cat ~/pandoc.txt
 
   deploy-pandoc:
