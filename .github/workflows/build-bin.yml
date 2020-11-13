@@ -94,8 +94,8 @@ jobs:
         name: binaries
         path: dist
     - name: Run index script
-        run: ./.github/scripts/index.sh > dist/index.html
-        shell: bash
+      run: ./.github/scripts/index.sh > dist/index.html
+      shell: bash
     - run: cat dist/index.html
     - name: Deploy
       if: ${{false}}
