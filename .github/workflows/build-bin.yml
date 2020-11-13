@@ -68,7 +68,13 @@ jobs:
         with:
           name: tinytex-linux
           path: tinytex*
-
+      - name: build texlive-local-deb
+        run: |
+          sudo apt-get install -y equivs
+          wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
+          equivs-build debian-*
+          mv texlive-local*.deb texlive-local.deb
+          ls 
 
   deploy-pandoc:
     needs: [build-pandoc]
