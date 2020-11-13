@@ -39,7 +39,13 @@ jobs:
       with:
         name: pandoc-linux-daily
         path: pandoc-linux.zip
-
+    - name: Pandoc version
+      run: |
+        unzip -j -d ~/bin pandoc-linux.zip
+        chmod +x ~/bin/pandoc
+        pandoc --version > pandoc.txt
+        cat pandoc.txt
+        
   deploy-pandoc:
     needs: [build-pandoc]
     name: deploy built binary
