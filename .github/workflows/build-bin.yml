@@ -19,7 +19,7 @@ jobs:
     - name: download latest
       id: latest-artifact
       run: | 
-        latest-id=$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')
+        export latest-id=$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')
         echo "::set-output name=artifactId::$latest-id"
     - run: echo ${{ steps.latest-artifact.outputs.artifactId }}
 
