@@ -87,7 +87,7 @@ jobs:
     steps:
     - uses: actions/download-artifact@v2
       with:
-        name: homework
+        name: binaries
         path: dist
     - run: ls -R dist
     - name: Deploy
