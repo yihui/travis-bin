@@ -113,3 +113,4 @@ jobs:
         cname: travis-bin.yihui.org
         user_name: 'github-actions[bot]'
         user_email: 'github-actions[bot]@users.noreply.github.com'
+        force_orphan: true
