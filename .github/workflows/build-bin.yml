@@ -1,0 +1,115 @@
+on:
+  schedule:
+    # run daily after pandoc nightly build
+    - cron: '55 8 * * *'
+  workflow_dispatch:
+
+name: build-bin
+
+jobs:
+  build-pandoc:
+    name: Pandoc
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Get pandoc artifacts list
+      id: artifacts
+      uses: actions/github-script@v3
+      with:
+        script: |
+         return await github.actions.listArtifactsForRepo({
+            owner: "jgm",
+            repo: "pandoc",
+          })
+    - name: Identify last nightly build for linux
+      id: latest-artifact
+      run: |
+        echo "::set-output name=artifactId::$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')"
+    - name: Get artifact download url
+      id: artifact
+      uses: actions/github-script@v3
+      with:
+        script: |
+          return await github.actions.downloadArtifact({
+            owner: "jgm",
+            repo: "pandoc",
+            artifact_id: ${{ steps.latest-artifact.outputs.artifactId }},
+            archive_format: "zip",
+          });
+    - name: Download artifact
+      run: |
+        curl -L -o pandoc-linux.zip $(echo '${{steps.artifact.outputs.result}}' | jq -r '.url')
+    - name: Pandoc version
+      run: |
+        unzip -j -d ~/bin pandoc-linux.zip
+        chmod +x ~/bin/pandoc
+        ~/bin/pandoc --version > .pandoc-version.txt
+        cat .pandoc-version.txt
+    - name: Upload as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: binaries
+        path: |
+          pandoc-linux.zip
+          .pandoc-version.txt
+        retention-days: 5
+
+  build-tinytex:
+      name: TinyTeX / TeX Live
+      runs-on: ubuntu-18.04
+      steps:
+      - name: Download and install TinyTeX
+        run: |
+          wget -q -O tinytex.tar.gz https://yihui.org/tinytex/TinyTeX-1.tar.gz
+          tar xzf tinytex.tar.gz -C $HOME
+          cd $HOME/.TinyTeX/bin/*
+          ./tlmgr option sys_bin ~/bin
+          ./tlmgr path add
+          echo "~/bin" >> $GITHUB_PATH
+      - name: TinyTeX version
+        run: |
+          echo $PATH
+          tlmgr --version > .tinytex-version.txt
+          cat .tinytex-version.txt
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries
+          path: |
+            tinytex.tar.gz
+            .tinytex-version.txt
+          retention-days: 5
+      - name: build texlive-local-deb
+        run: |
+          sudo apt-get install -y equivs
+          wget https://github.com/scottkosty/install-tl-ubuntu/raw/master/debian-control-texlive-in.txt
+          equivs-build debian-*
+          mv texlive-local*.deb texlive-local.deb
+      - name: Upload as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: binaries
+          path: texlive-local.deb
+          retention-days: 5
+
+  deploy:
+    needs: [build-pandoc, build-tinytex]
+    name: deploy built binary
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/download-artifact@v2
+      with:
+        name: binaries
+        path: dist
+    - name: Run index script
+      run: ./.github/scripts/index.sh > dist/index.html
+      shell: bash
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
+        cname: travis-bin.yihui.org
+        user_name: 'github-actions[bot]'
+        user_email: 'github-actions[bot]@users.noreply.github.com'
+        force_orphan: true
