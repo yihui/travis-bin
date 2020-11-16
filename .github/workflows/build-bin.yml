@@ -3,6 +3,9 @@ on:
     # run daily after pandoc nightly build
     - cron: '55 8 * * *'
   workflow_dispatch:
+  pull_request:
+    branches:
+      - master
 
 
 name: build-bin
