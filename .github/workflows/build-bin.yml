@@ -1,12 +1,8 @@
-on: 
+on:
   schedule:
     # run daily after pandoc nightly build
     - cron: '55 8 * * *'
   workflow_dispatch:
-  pull_request:
-    branches:
-      - master
-
 
 name: build-bin
 
@@ -18,7 +14,7 @@ jobs:
     - name: Get pandoc artifacts list
       id: artifacts
       uses: actions/github-script@v3
-      with: 
+      with:
         script: |
          return await github.actions.listArtifactsForRepo({
             owner: "jgm",
@@ -26,7 +22,7 @@ jobs:
           })
     - name: Identify last nightly build for linux
       id: latest-artifact
-      run: | 
+      run: |
         echo "::set-output name=artifactId::$(echo '${{steps.artifacts.outputs.result}}' | jq -r '.data.artifacts | map(select(.name == "nightly-linux")) | .[0].id')"
     - name: Get artifact download url
       id: artifact
