@@ -9,7 +9,7 @@ name: build-bin
 jobs:
   build-pandoc:
     name: Pandoc
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - name: Get pandoc artifacts list
       id: artifacts
