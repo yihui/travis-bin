@@ -55,7 +55,7 @@ jobs:
 
   build-tinytex:
       name: TinyTeX / TeX Live
-      runs-on: ubuntu-18.04
+      runs-on: ubuntu-latest
       steps:
       - name: Download and install TinyTeX
         run: |
@@ -94,7 +94,7 @@ jobs:
   deploy:
     needs: [build-pandoc, build-tinytex]
     name: deploy built binary
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - uses: actions/download-artifact@v2
