@@ -1,0 +1,3 @@
+tlmgr revision 68903 (2023-11-19 19:53:19 +0100)
+tlmgr using installation: /home/runner/.TinyTeX
+TeX Live (https://tug.org/texlive) version 2023
