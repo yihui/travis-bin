@@ -1,3 +1,4 @@
-![Binary Build](https://github.com/yihui/travis-bin/workflows/build-bin/badge.svg)
+**NOTE**: this repo is no longer maintained. You can find and download the nightly builds by yourself:
 
-The nightly builds of [Pandoc](https://pandoc.org) and [TinyTeX](https://github.com/yihui/tinytex/) are downloaded and re-published to <https://travis-bin.yihui.org> mainly for testing purposes.
+- Pandoc: <https://github.com/jgm/pandoc/actions/workflows/nightly.yml>
+- TinyTeX: <https://github.com/rstudio/tinytex-releases/releases/tag/daily>
